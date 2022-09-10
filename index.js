@@ -1,10 +1,9 @@
 const express = require('express')
+const routes = require('./routes')
 
 const app = express();
 
-app.use('/', (req,res)=>{
-    res.send('Funcionando')
-})
+app.use('/', routes());
 
 
 const server = 4000;
