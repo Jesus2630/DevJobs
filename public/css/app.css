@@ -5,6 +5,7 @@
     --color-bg: #F2E7DC;
     --color-secundario: #D93223;
     --color-gris: #333;
+    --color-gris_claro: #616065;
     --color-negro: #000000;
     --color-blanco: #ffffff;
 }
@@ -136,13 +137,12 @@ h3 {
     }
 }
 .buscador input[type="text"] {
-    background-color: rgba(255,255,255,.1);
     width: 100%;
     border: none;
     padding: .5rem 4rem .5rem 2rem;
     height: 5rem;
     border-radius: 1rem;
-    background-color: var(--color-gris);
+    background-color: var(--color-primario_oscuro);
     font-size: 2.2rem;
     color: var(--color-blanco);
 }
@@ -190,7 +190,7 @@ h3 {
     padding: .5rem 0;
 }
 .caja p {
-    color: #ffffff;
+    color: var(--color-gris);
 }
 .contrato {
     text-transform: capitalize;
@@ -210,6 +210,7 @@ h3 {
     font-size: 2.4rem; 
     margin: .5rem 0; 
     text-align: left;
+    color: var(--color-gris_claro);
 }
 .caja .btn {
     text-align: center;
@@ -284,7 +285,6 @@ h3 {
     font-size: 2.4rem;
     margin-bottom: 3rem;
     text-transform: uppercase;
-    
 }
 .default-form .campo {
     margin-bottom: 3rem;
