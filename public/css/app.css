@@ -2,7 +2,7 @@
     --color-primario: #1F92BF;
     --color-primario_altero: #1B70A6;
     --color-primario_oscuro: #0B438C;
-    --color-bg: #F2E7DC;
+    --color-bg: #F2F2F2;
     --color-secundario: #D93223;
     --color-gris: #333;
     --color-gris_claro: #616065;
@@ -373,7 +373,7 @@ trix-toolbar .trix-button--icon-strike {
     margin-bottom: 2rem;
     text-transform: uppercase;
     font-weight: 700;
-    color: white;
+    color: var(--color-negro);
     flex: 0 0 calc( 50% - 1rem);
     text-align: center;
     border-radius: 1rem;
