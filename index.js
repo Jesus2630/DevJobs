@@ -17,7 +17,8 @@ const app = express();
 /* Habilito Handlebars */
 app.engine('handlebars',
     exphbs.engine({
-        defaultLayout: 'layout'
+        defaultLayout: 'layout',
+        helpers:require('./helpers/handlebars')
     })
 )
 app.set('view engine', 'handlebars'); 
