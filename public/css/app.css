@@ -4,6 +4,9 @@
     --color-primario_oscuro: #0B438C;
     --color-bg: #F2E7DC;
     --color-secundario: #D93223;
+    --color-gris: #333;
+    --color-negro: #000000;
+    --color-blanco: #ffffff;
 }
 
 html {
@@ -24,6 +27,7 @@ p {
 /** Globales **/
 h1, h2, h3  {
     margin: 0;
+    color: var(--color-primario_oscuro);
 }
 h1 {
     font-weight: 900;
@@ -37,7 +41,7 @@ h3 {
     font-size: 2.8rem;
 }
 .contenedor {
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
 }
 .separador {
@@ -89,8 +93,8 @@ h3 {
 
 /** Header **/
 .tagline {
-    font-size: 2.2rem;
-    color: #ffffff;
+    font-size: 2.4rem;
+    color: var(--color-gris);
     margin: 2rem 0 3rem 0;
 }
 
@@ -117,14 +121,18 @@ h3 {
     display: flex;
     justify-content: flex-end;
     flex: 1;
+    display: none;
 }
 .buscador form {
     flex:1;
     position: relative;
 }
 @media (min-width: 768px) {
+    .buscador{
+        display: flex;
+    }
     .buscador form {
-        flex: 0 0 40%;
+        flex: 0 0 30%;
     }
 }
 .buscador input[type="text"] {
@@ -134,8 +142,9 @@ h3 {
     padding: .5rem 4rem .5rem 2rem;
     height: 5rem;
     border-radius: 1rem;
-    color: white;
-    font-size: 1.2rem;
+    background-color: var(--color-gris);
+    font-size: 2.2rem;
+    color: var(--color-blanco);
 }
 .buscador input[type="submit"] {
     display: block;
