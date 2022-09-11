@@ -35,7 +35,7 @@ const postulacionesSchema = new mongoose.Schema({
         type:String,
         lowercase:true
     },
-    requisitos: [String],
+    skills: [String],
     candidatos: [{
         nombre: String,
         email: String,

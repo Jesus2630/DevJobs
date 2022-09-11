@@ -8,7 +8,8 @@ module.exports = ()=>{
     router.get('/', homeControllers.mostrarTrabajos)
 
     //Crear Vacante
-    router.get('/vacantes/nueva', vacantesControllers.nuevaVacante )
+    router.get('/vacantes/nueva', vacantesControllers.nuevaVacante);
+    router.post('/vacantes/nueva', vacantesControllers.agregarVacante);
 
     return router;
 }
