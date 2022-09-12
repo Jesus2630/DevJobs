@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "sv": "nodemon index",
-    "start":"concurrently \"npm run sv\" \"npm run watch \" ",
+    "start": "concurrently \"npm run sv\" \"npm run watch \" ",
     "watch": "webpack -w --mode development"
   },
   "keywords": [],
@@ -14,6 +14,7 @@
   "devDependencies": {
     "@babel/core": "^7.19.0",
     "@babel/preset-env": "^7.19.0",
+    "@handlebars/allow-prototype-access": "^1.0.5",
     "babel-loader": "^8.2.5",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
@@ -21,6 +22,7 @@
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
+    "handlebars": "^4.7.7",
     "mongoose": "^6.6.0",
     "nodemon": "^2.0.19",
     "shortid": "^2.2.16",

@@ -447,7 +447,7 @@ p.candidatos {
 }
 .lista-candidatos p,
 .lista-vacantes p {
-    color: white;
+    color: var(--color-gris_claro);
     text-align: center;
 }
 

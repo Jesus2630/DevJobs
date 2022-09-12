@@ -1,76 +1,28 @@
 <main class="lista-vacantes">
     <h2>Lista de Postulaciones</h2>
 
-    <div class="vacante">
-        <div class="caja">
-            <h3>Medeni</h3>
-            <p class="puesto">Encargado de Proyectos</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Ubicación</p>
-            <p class="nombre">Tigre</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Contrato</p>
-            <p class="nombre contrato">Tiempo Completo</p>
-        </div>
-        <div class="caja centrar-vertical">
-            <a href="#" class="btn btn-verde">Ver Más</a>
-        </div>
-    </div>
-    {{!-- Fin Vacante --}}
-    <div class="vacante">
-        <div class="caja">
-            <h3>Logister</h3>
-            <p class="puesto">Manejo de Productos</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Ubicación</p>
-            <p class="nombre">Malvinas Argentinas</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Contrato</p>
-            <p class="nombre contrato">Tiempo Completo</p>
-        </div>
-        <div class="caja centrar-vertical">
-            <a href="#" class="btn btn-verde">Ver Más</a>
-        </div>
-    </div>
-    {{!-- Fin Vacante --}}
-    <div class="vacante">
-        <div class="caja">
-            <h3>Shellux</h3>
-            <p class="puesto">Analista Informático</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Ubicación</p>
-            <p class="nombre">Don Torcuato</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Contrato</p>
-            <p class="nombre contrato">Tiempo Completo</p>
-        </div>
-        <div class="caja centrar-vertical">
-            <a href="#" class="btn btn-verde">Ver Más</a>
-        </div>
-    </div>
-    {{!-- Fin Vacante --}}
-    <div class="vacante">
-        <div class="caja">
-            <h3>Didi</h3>
-            <p class="puesto">Soporte técnico</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Ubicación</p>
-            <p class="nombre">Tigre</p>
-        </div>
-        <div class="caja">
-            <p class="etiqueta">Contrato</p>
-            <p class="nombre contrato">Tiempo Completo</p>
-        </div>
-        <div class="caja centrar-vertical">
-            <a href="#" class="btn btn-verde">Ver Más</a>
-        </div>
-    </div>
-    {{!-- Fin Vacante --}}
+
+    {{#if vacantes.length}}
+        {{#each vacantes as |vacante|}}
+            <div class="vacante">
+                <div class="caja">
+                    <h3>{{vacante.empresa}}</h3>
+                    <p class="puesto">{{vacante.titulo}}</p>
+                </div>
+                <div class="caja">
+                    <p class="etiqueta">Ubicación</p>
+                    <p class="nombre">{{vacante.ubicacion}}</p>
+                </div>
+                <div class="caja">
+                    <p class="etiqueta">Contrato</p>
+                    <p class="nombre contrato">{{vacante.contrato}}</p>
+                </div>
+                <div class="caja centrar-vertical">
+                    <a href="/vacantes/{{vacante.url}}" class="btn btn-verde">Más Info</a>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>No hay Vacantes Activas</p>
+    {{/if}}
 </main>

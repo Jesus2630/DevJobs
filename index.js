@@ -2,13 +2,15 @@ const mongoose = require('mongoose')
 require('./config/db')
 
 const express = require('express')
-const exphbs = require('express-handlebars')
 const routes = require('./routes')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser')
+const Handlebars = require('handlebars');
+const exphbs = require('express-handlebars'); 
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 
 require('dotenv').config({path: 'variables.env'})
 
@@ -23,6 +25,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 /* Habilito Handlebars */
 app.engine('handlebars',
     exphbs.engine({
+        handlebars: allowInsecurePrototypeAccess(Handlebars),
         defaultLayout: 'layout',
         helpers:require('./helpers/handlebars')
     })
