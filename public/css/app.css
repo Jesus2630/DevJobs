@@ -250,11 +250,11 @@ h3 {
     line-height: 1.4;
 }
 .vacante-descripcion *{
-    color: white!important;
+    color: var(--color-gris)!important;
     line-height: 2.2;
 }
 .skills {
-    color: white;
+    color: var(--color-primario_oscuro);
 }
 .skills li,
 .vacante-descripcion div  {
