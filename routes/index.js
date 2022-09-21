@@ -21,6 +21,7 @@ module.exports = ()=>{
 
     //Crear cuenta
     router.get('/crear-cuenta', usuariosControllers.formCrearCuenta);
+    router.post('/crear-cuenta', usuariosControllers.crearUsuario);
 
     return router;
 }
