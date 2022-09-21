@@ -9,3 +9,4 @@ mongoose
 
 //Importo los modelos
 require('../models/Postulaciones')
+require('../models/Usuarios')
