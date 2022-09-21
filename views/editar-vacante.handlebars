@@ -20,12 +20,14 @@
         </div>
         <div class="campo">
             <label>Contrato</label>
-            <select name="contrato" >
-                <option value="" disabled selected>Seleccionar</option>
-                <option value="completo">Tiempo Completo</option>
-                <option value="medio">Medio Tiempo</option>
-                <option value="remoto">Trabajo Remoto</option>
-                <option value="freelance">Trabajo Freelance</option>
+            <select name="contrato">
+                {{#tipoContrato vacante.contrato}}
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="Tiempo Completo">Tiempo Completo</option>
+                    <option value="Medio Tiempo">Medio Tiempo</option>
+                    <option value="Trabajo Remoto">Trabajo Remoto</option>
+                    <option value="Trabajo Freelance">Trabajo Freelance</option>
+                {{/tipoContrato}}
             </select>
         </div>
         <h3>Descripción del trabajo</h3>
@@ -38,13 +40,13 @@
         <h3>Conocimientos</h3>
 
         <ul class="lista-conocimientos">
-            {{#seleccionarHabilidades a}}
+            {{#seleccionarHabilidades vacante.skills}}
             {{/seleccionarHabilidades}}
         </ul>
 
         <div class="campo centrar-horizontal">
             <input type="hidden" name="skills" id="skills">
-            <input type="submit" value="publicar" class="btn btn-azul">
+            <input type="submit" value="Guardar Cambios" class="btn btn-azul">
         </div>
     </form>
 </main>

@@ -3,6 +3,7 @@ const router = express.Router();
 
 const homeControllers = require('../controllers/homeControllers');
 const vacantesControllers = require('../controllers/vacantesControllers')
+const usuariosControllers = require('../controllers/usuariosControllers')
 
 module.exports = ()=>{
     router.get('/', homeControllers.mostrarTrabajos)
@@ -16,6 +17,10 @@ module.exports = ()=>{
 
     //Editar Vacante
     router.get('/vacantes/editar/:url', vacantesControllers.formEditarVacante);
+    router.post('/vacantes/editar/:url', vacantesControllers.editarVacante);
+
+    //Crear cuenta
+    router.get('/crear-cuenta', usuariosControllers.formCrearCuenta);
 
     return router;
 }
