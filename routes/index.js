@@ -5,7 +5,7 @@ const homeControllers = require('../controllers/homeControllers');
 const vacantesControllers = require('../controllers/vacantesControllers')
 const usuariosControllers = require('../controllers/usuariosControllers')
 
-module.exports = ()=>{
+module.exports = () => {
     router.get('/', homeControllers.mostrarTrabajos)
 
     //Crear Vacante
@@ -21,7 +21,10 @@ module.exports = ()=>{
 
     //Crear cuenta
     router.get('/crear-cuenta', usuariosControllers.formCrearCuenta);
-    router.post('/crear-cuenta', usuariosControllers.crearUsuario);
+    router.post('/crear-cuenta',
+        usuariosControllers.validarRegistro,
+        usuariosControllers.crearUsuario
+    );
 
     return router;
 }

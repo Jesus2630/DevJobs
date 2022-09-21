@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 const Handlebars = require('handlebars');
 const exphbs = require('express-handlebars'); 
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const flash = require('connect-flash');
 
 require('dotenv').config({path: 'variables.env'})
 
@@ -20,7 +21,6 @@ const app = express();
 //Habilito body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-
 
 /* Habilito Handlebars */
 app.engine('handlebars',
@@ -46,6 +46,14 @@ app.use(session({
     store: MongoStore.create({mongoUrl: process.env.URI})
 }))
 
+//Alertas y Flashh messages
+app.use(flash());
+
+//Creamos nuestro middleware
+app.use((req,res,next) =>{
+    res.locals.mensajes = req.flash(); 
+    next();
+})
 
 /* Routes */
 app.use('/', routes());
