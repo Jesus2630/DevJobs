@@ -2,8 +2,9 @@ const express = require('express')
 const router = express.Router();
 
 const homeControllers = require('../controllers/homeControllers');
-const vacantesControllers = require('../controllers/vacantesControllers')
-const usuariosControllers = require('../controllers/usuariosControllers')
+const vacantesControllers = require('../controllers/vacantesControllers');
+const usuariosControllers = require('../controllers/usuariosControllers');
+const authControllers = require('../controllers/authControllers');
 
 module.exports = () => {
     router.get('/', homeControllers.mostrarTrabajos)
@@ -28,6 +29,7 @@ module.exports = () => {
 
     //Autenticación de usuario
     router.get('/iniciar-sesion', usuariosControllers.formIniciarSesion);
+    router.post('/iniciar-sesion', authControllers.autenticarUsuario);
 
     return router;
 }
