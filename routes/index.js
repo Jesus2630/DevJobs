@@ -26,5 +26,7 @@ module.exports = () => {
         usuariosControllers.crearUsuario
     );
 
+    //Autenticación de usuario
+
     return router;
 }

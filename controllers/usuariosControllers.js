@@ -21,11 +21,12 @@ exports.validarRegistro = async(req,res,next) =>{
 
     await Promise.all(rules.map(validation => validation.run(req)));
     const errores = validationResult(req);
+
     //si hay errores
     if (!errores.isEmpty()) {
         req.flash('error', errores.array().map(error => error.msg));
         res.render('crear-cuenta', {
-            nombrePagina: 'Crea una cuenta en Devjobs',
+            nombrePagina: 'Crea tu cuenta en Enjobs',
             tagline: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
             mensajes: req.flash()
         })
@@ -39,10 +40,13 @@ exports.validarRegistro = async(req,res,next) =>{
 exports.crearUsuario = async(req,res,next) =>{
     //Crear usuario
     const usuario = new Usuarios(req.body);
+ 
 
-    const nuevoUsuario = await usuario.save();
-
-    if(!nuevoUsuario) return next();
-
-    res.redirect('/iniciar-sesion')
+    try {
+        await usuario.save();
+        res.redirect('/iniciar-sesion')
+    }catch(error){
+        req.flash('error',error); 
+        res.redirect('/crear-cuenta')
+    }
 }
