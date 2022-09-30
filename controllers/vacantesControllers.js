@@ -12,6 +12,9 @@ exports.nuevaVacante = (req,res) =>{
 exports.agregarVacante = async(req,res) =>{
      const vacante = new Vacante(req.body);
 
+     //Usuario que crea la vacante
+     vacante.autor = req.user._id;
+
      //Crear arreglo de habilidades
      vacante.skills = req.body.skills.split(',');
 
