@@ -62,6 +62,7 @@ h3 {
     transition: background-color .3s ease-out;
     display: block;
     border:none;
+    box-shadow: 5px 10px 22px #0d13c0a6;
 }
 .btn-verde {
     background-color: #00C897;
@@ -78,10 +79,19 @@ h3 {
 }
 
 .btn-amarillo {
-    background-color: #F6B15F;
+    background-color: #D3D936;
 }
+
+.btn-amarillo:hover{
+    background-color: #898d23;
+}
+
 .btn-rojo {
     background-color: #C80045;
+}
+
+.btn-rojo:hover {
+    background-color: #761034;
 }
 
 .editar-btn {
