@@ -44,9 +44,9 @@ usuariosSchema.post('save', function(error,doc,next){
 });
 
 //Autenticar usuarios
-usuariosSchema.method = {
+usuariosSchema.methods = {
     compararPassword : function(password){
-        return bcrypt.compareSync(password, this.password);
+        return bcrypt.compareSync(password, this.password); 
     }
 }
 

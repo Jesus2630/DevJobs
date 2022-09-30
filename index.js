@@ -12,6 +12,7 @@ const Handlebars = require('handlebars');
 const exphbs = require('express-handlebars'); 
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const flash = require('connect-flash');
+const passport = require('./config/passport');
 
 require('dotenv').config({path: 'variables.env'})
 
@@ -48,6 +49,12 @@ app.use(session({
 
 //Alertas y Flashh messages
 app.use(flash());
+
+
+//Inicializar passport 
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //Creamos nuestro middleware
 app.use((req,res,next) =>{
