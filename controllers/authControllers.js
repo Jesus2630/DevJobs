@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Vacante  = mongoose.model('Postulacion');
 
 exports.autenticarUsuario = passport.authenticate('local', {
-    successRedirect : '/ok',
+    successRedirect : '/administracion',
     failureRedirect : '/iniciar-sesion',
     failureFlash: true,
     badRequestMessage: 'Ambos campos son obligatorios'
@@ -32,6 +32,19 @@ exports.mostrarPanel = async(req,res)=>{
     res.render('administracion', {
         nombrePagina: "Panel de administración",
         tagLine: 'Crea y Administra tus vacantes aquí.',
+        cerrarSesion: true,
+        nombre: req.user.nombre,
         vacantes
     })
+}
+
+//Cerrar sesión
+exports.cerrarSesion = (req,res) =>{
+    req.logout(function(err){
+        if(err) {
+            return next(err);
+        }
+        req.flash('correcto', 'Sesión cerrada')
+        return res.redirect('/iniciar-sesion')
+    });
 }

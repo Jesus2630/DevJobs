@@ -6,7 +6,6 @@ const shortid = require('shortid');
 const postulacionesSchema = new mongoose.Schema({
     titulo:{
         type: String,
-        require: 'El nombre de la vacante es obligatorio',
         trim: true
     },
     empresa:{
@@ -16,7 +15,6 @@ const postulacionesSchema = new mongoose.Schema({
     ubicacion:{
         type:String,
         trim:true,
-        required: 'La ubicación es necesaria'
     },
     sueldo:{
         type: String,
@@ -44,7 +42,6 @@ const postulacionesSchema = new mongoose.Schema({
     autor: {
         type: mongoose.Schema.ObjectId,
         ref: 'Usuarios',
-        required: 'El autor es obligatorio'
     }
 });
 

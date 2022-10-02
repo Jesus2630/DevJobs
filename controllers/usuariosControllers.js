@@ -51,9 +51,64 @@ exports.crearUsuario = async(req,res,next) =>{
     }
 }
 
+//Inicio de sesión
+
 exports.formIniciarSesion = (req,res) => {
     res.render('iniciar-sesion', {
         nombrePagina : 'Iniciar Sesión en Enjobs'
     }
     )
+}
+
+//Editar Perfil
+exports.formEditarPerfil = (req,res) =>{
+    res.render('editar-perfil', {
+        nombrePagina : 'Edita tu pefil de Enjobs',
+        usuario: req.user,
+        cerrarSesion: true,
+        nombre : req.user.nombre         
+    })
+}
+
+//Guardar los cambios en editar perfil
+exports.editarPerfil = async(req,res) =>{
+    const usuario = await Usuarios.findById(req.user._id);
+
+    usuario.nombre = req.body.nombre;
+    usuario.email  = req.body.email;
+    if(req.body.password){
+        usuario.password = req.body.password
+    }
+    await usuario.save();
+
+    req.flash('correcto', 'Cambios guardados correctamente');
+    //Redirect
+    res.redirect('/administracion');
+}
+
+//Sanititzar y validar editar-perfil
+exports.validarPerfil = async (req,res,next) =>{
+     //Sanitizo los campos
+     const rules = [
+        body('nombre').not().isEmpty().withMessage('El nombre es obligatorio').escape(),
+        body('email').isEmail().withMessage('El Email es obligatorio').normalizeEmail(),
+    ]
+
+    await Promise.all(rules.map(validation => validation.run(req)));
+    const errores = validationResult(req);
+
+    //si hay errores
+    if (!errores.isEmpty()) {
+        req.flash('error', errores.array().map(error => error.msg));
+        res.render('editar-perfil', {
+            nombrePagina : 'Edita tu pefil de Enjobs',
+            usuario: req.user,
+            cerrarSesion: true,
+            nombre : req.user.nombre         
+        })
+        return;
+    }
+ 
+    //si toda la validacion es correcta
+    next();
 }

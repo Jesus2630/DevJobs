@@ -12,6 +12,6 @@ exports.mostrarTrabajos = async(req,res,next) =>{
         tagLine: 'Encuentra y publica empleos',
         barra: true,
         boton: true,
-        vacantes: vacantes
+        vacantes: vacantes,
     })
 }
