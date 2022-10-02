@@ -69,6 +69,14 @@ exports.editarVacante = async(req,res) =>{
         res.redirect(`/vacantes/${vacante.url}`)
 }
 
+exports.eliminarVacante = async(req,res) =>{
+    const {id} = req.params;
+
+    res.status(200).send('Vacante Eliminada Correctamente');
+}
+
+
+//Validar Vacante
 exports.validarVacante = async (req, res, next) => {
     const rules = [
         body("titulo").not().isEmpty().withMessage("Agregar un título a la vacante.").escape(),
