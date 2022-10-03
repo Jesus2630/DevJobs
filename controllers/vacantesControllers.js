@@ -69,12 +69,6 @@ exports.editarVacante = async(req,res) =>{
         res.redirect(`/vacantes/${vacante.url}`)
 }
 
-exports.eliminarVacante = async(req,res) =>{
-    const {id} = req.params;
-
-    res.status(200).send('Vacante Eliminada Correctamente');
-}
-
 
 //Validar Vacante
 exports.validarVacante = async (req, res, next) => {
@@ -90,23 +84,42 @@ exports.validarVacante = async (req, res, next) => {
       const errores = validationResult(req);
   
  
-  if (errores) {
-    // Recargar pagina con errores
-    req.flash(
-      "error",
-      errores.array().map((error) => error.msg)
-    );
-    res.render('nueva-vacante', {
-        nombrePagina: 'Nueva Vacante',
-        tagLine: 'Publicá tu empleo',
-        cerrarSesion: true,
-        nombre : req.user.nombre,
-        mensajes: req.flash()
+   //si hay errores
+   if (errores.length > 0) {
+        req.flash('error', errores.array().map(error => error.msg));
+        res.render('nueva-vacante', {
+            nombrePagina: 'Nueva Vacante',
+            tagLine: 'Publicá tu empleo',
+            cerrarSesion: true,
+            nombre : req.user.nombre,   
+            mensajes: req.flash()
     })
     return;
-  }
+}
 
-  //si toda la validacion es correcta
-  next();
-};
+    //si toda la validacion es correcta
+    next();
+}
+exports.eliminarVacante = async(req,res) =>{
+    const {id} = req.params;
+
+    const vacante = await Vacante.findById(id);
+
+    if(verificarAutor(vacante, req.user)){
+        //Si es el usuario eliminar
+        vacante.remove()
+        res.status(200).send('Vacante Eliminada Correctamente');   
+    }else{
+        //No permitir
+        res.status(403).send('Error')
+    }
+}
+
+
+const verificarAutor = (vacante = {}, usuario = {})=>{
+    if(!vacante.autor.equals(usuario._id)){
+        return false
+    }
+    return true;
+}
 

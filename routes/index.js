@@ -15,7 +15,7 @@ module.exports = () => {
         vacantesControllers.nuevaVacante
      );
     router.post('/vacantes/nueva',
-    authControllers.verificarUsuario,
+        authControllers.verificarUsuario,
         vacantesControllers.validarVacante,
         vacantesControllers.agregarVacante
     );
@@ -71,7 +71,8 @@ module.exports = () => {
     )
     router.post('/editar-perfil',
         authControllers.verificarUsuario,
-        usuariosControllers.validarPerfil,
+       /*  usuariosControllers.validarPerfil, */
+        usuariosControllers.subirImagen,
         usuariosControllers.editarPerfil
     )
 

@@ -1,13 +1,41 @@
 const mongoose = require('mongoose');
 const Usuarios = mongoose.model('Usuarios');
 const { body, validationResult } = require('express-validator');
+const shortid = require('shortid');
+const multer = require('multer');
+
+//ConfiguracionMulter
+const storage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null, __dirname + '../../public/uploads/perfiles')
+    },
+    filename: function(req,file,cb){
+        cb(null, `${Date.now()}-${file.originalname}`)
+    }
+})
+
+const fileFilter = (req,file,cb) =>{
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+        cb(null, true);
+    }else{
+        cb(null, false);
+    }
+}
+
+//Subir imagen
+const upload = multer({storage : storage, fileFilter})
+
+exports.subirImagen = upload.single('imagen');
+
+
 
 exports.formCrearCuenta = (req,res) =>{
      res.render('crear-cuenta', {
         nombrePagina: 'Crea tu cuenta en Enjobs',
-        tagline: 'Publica tus ofertas laborales gratis, solo creando tu cuenta'
+        tagLine: 'Publica tus ofertas laborales gratis, solo creando tu cuenta'
      })
 }
+
 
 exports.validarRegistro = async(req,res,next) =>{
     //Sanitizo los campos
@@ -27,7 +55,7 @@ exports.validarRegistro = async(req,res,next) =>{
         req.flash('error', errores.array().map(error => error.msg));
         res.render('crear-cuenta', {
             nombrePagina: 'Crea tu cuenta en Enjobs',
-            tagline: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
+            tagLine: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
             mensajes: req.flash()
         })
         return;
@@ -76,9 +104,11 @@ exports.editarPerfil = async(req,res) =>{
 
     usuario.nombre = req.body.nombre;
     usuario.email  = req.body.email;
+    
     if(req.body.password){
         usuario.password = req.body.password
     }
+
     await usuario.save();
 
     req.flash('correcto', 'Cambios guardados correctamente');

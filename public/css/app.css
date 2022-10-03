@@ -41,6 +41,11 @@ h2 {
 h3 {
     font-size: 2.8rem;
 }
+
+input{
+    color: var(--color-gris_claro);
+}
+
 .contenedor {
     max-width: 90%;
     margin: 0 auto;
@@ -146,6 +151,7 @@ h3 {
         flex: 0 0 30%;
     }
 }
+
 .buscador input[type="text"] {
     width: 100%;
     border: none;
@@ -324,7 +330,7 @@ h3 {
 } 
 
 .default-form input[type="file"] {
-    color: white;
+    color: var(--color-gris_claro);
 }
 trix-toolbar, 
 trix-editor {

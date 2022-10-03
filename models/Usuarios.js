@@ -20,6 +20,7 @@ const usuariosSchema = new mongoose.Schema({
     },
     token: String,
     expira: Date,
+    imagen: String
 })
 
 //Método para hasheo

@@ -104,9 +104,8 @@ const accionesListado = e =>{
                             e.target.parentElement.parentElement.parentElement.removeChild(
                                 e.target.parentElement.parentElement
                             )
-
                         }
-                    });
+                    })
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
@@ -116,7 +115,9 @@ const accionesListado = e =>{
               )
             }
           })
-    }else{
+    }else if(e.target.tagName === 'A' ){
         window.location.href = e.target.href;
+
+        return;
     }
 }
