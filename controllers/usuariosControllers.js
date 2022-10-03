@@ -4,28 +4,7 @@ const { body, validationResult } = require('express-validator');
 const shortid = require('shortid');
 const multer = require('multer');
 
-//ConfiguracionMulter
-const storage = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null, __dirname + '../../public/uploads/perfiles')
-    },
-    filename: function(req,file,cb){
-        cb(null, `${Date.now()}-${file.originalname}`)
-    }
-})
 
-const fileFilter = (req,file,cb) =>{
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
-        cb(null, true);
-    }else{
-        cb(null, false);
-    }
-}
-
-//Subir imagen
-const upload = multer({storage : storage, fileFilter})
-
-exports.subirImagen = upload.single('imagen');
 
 
 
