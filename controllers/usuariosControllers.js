@@ -4,7 +4,13 @@ const { body, validationResult } = require('express-validator');
 const shortid = require('shortid');
 const multer = require('multer');
 
-
+exports.subirImagen = (req,res) =>{
+    upload(req,res, function(error){
+        if(error instanceof multer.MulterError){
+            
+        }
+    })
+}
 
 
 
