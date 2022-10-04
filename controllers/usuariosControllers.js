@@ -26,7 +26,7 @@ const configuracionMulter = {
       limits: {fileSize: 100000}
 } 
 
-const upload = multer (configuracionMulter).single('imagen');
+const upload = multer(configuracionMulter).single('imagen');
 
 exports.subirImagen = (req,res,next) =>{
     upload(req,res, function(error){
