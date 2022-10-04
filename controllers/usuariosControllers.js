@@ -17,19 +17,19 @@ const storage = multer.diskStorage({
 
 //Subir imagen
 const upload = multer({ 
-    storage: storage, 
-    fileFilter: (req,file,cb) =>{
+    storage: storage,
+    fileFilter: (req,file,cb,res) =>{
         if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
             cb(null, true);
         }else{
-            cb(new Error('Formato no válido'), false);
+            cb(new Error('Formato No valido'), false);
         }
     },
-    limits: {fileSize : 100000} 
+    limits: {fileSize : 100000},
 })
 
-exports.subirImagen = upload.single('imagen');
 
+exports.subirImagen = upload.single('imagen')
 
 
 exports.formCrearCuenta = (req,res) =>{
