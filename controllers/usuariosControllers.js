@@ -7,13 +7,14 @@ const multer = require('multer');
 
 //Configuracion Multer
 const configuracionMulter = {
+    limits: {fileSize: 100000},
     storage : fileStorage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, __dirname + '../../public/uploads/perfiles')
         },
         filename: function (req, file, cb) {
             const extension = file.mimetype.split('/')[1]
-            cb(null, `${shortid.generate()}.${extension}`)
+            cb(null, `${shortid.generate()}.${extension}`);  
         }
       }),
       fileFilter(req,file,cb){
@@ -22,19 +23,29 @@ const configuracionMulter = {
         }else{
             cb(null, false);
         }
-      },
-      limits: {fileSize: 100000}
+      }
 } 
 
 const upload = multer(configuracionMulter).single('imagen');
 
 exports.subirImagen = (req,res,next) =>{
-    upload(req,res, function(error){
-        if(error instanceof multer.MulterError){
-            return next();
+    upload(req, res, function (error) {
+        if (error) {
+            if (error instanceof multer.MulterError) { //si el error fue generado por multer
+                if (error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El tamaño es demasiado grande. Máximo 100KB');
+                } else {
+                    req.flash('error', error.message);
+                }
+            } else { 
+                req.flash('error', error.message);
+            }
+            res.redirect('/administracion');
+            return;
+        } else {
+            next();
         }
-    })
-    next();
+    });
 }
 
 
@@ -119,9 +130,9 @@ exports.editarPerfil = async(req,res) =>{
         usuario.password = req.body.password
     }
 
-    if(req.file){
+   if(req.file){
         usuario.imagen = req.file.filename;
-    }
+   }
 
     await usuario.save();
 
