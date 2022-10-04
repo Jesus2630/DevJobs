@@ -7,7 +7,7 @@ const multer = require('multer');
 
 //Configuracion Multer
 const configuracionMulter = {
-    storage : multer.diskStorage({
+    storage : fileStorage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, __dirname + '../../public/uploads/perfiles')
         },
@@ -22,7 +22,8 @@ const configuracionMulter = {
         }else{
             cb(null, false);
         }
-      }
+      },
+      limits: {fileSize: 100000}
 } 
 
 const upload = multer (configuracionMulter).single('imagen');
@@ -116,6 +117,10 @@ exports.editarPerfil = async(req,res) =>{
     
     if(req.body.password){
         usuario.password = req.body.password
+    }
+
+    if(req.file){
+        usuario.imagen = req.file.filename;
     }
 
     await usuario.save();
