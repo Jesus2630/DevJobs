@@ -11,3 +11,33 @@ let transport = nodeMailer.createTransport({
         pass: emailConfig.pass
     }   
 }) 
+
+
+//Utilizar templates handlebars
+transport.use('compile', hbs({
+      viewEngine: {
+        extName: 'handlebars',
+        partialsDir: __dirname + '/../views/emails',
+        layoutsDir: __dirname + '/../views/emails',
+        defaultLayout: 'reset.handlebars'
+      },
+      viewPath: __dirname + '/../views/emails',
+      extName: '.handlebars'
+    })
+  );
+
+
+exports.enviar = async(opciones) =>{
+    const opcionesEmail = {
+        from: 'Enjobs <noreply@enjobs.com',
+        to: opciones.usuario.email,
+        subject: opciones.subject,
+        template: opciones.archivo,
+        context:{
+            resetUrl: opciones.resetUrl
+        }
+    }
+
+    const sendMail = util.promisify(transport.sendMail, transport);
+    return sendMail.call(transport, opcionesEmail);
+}

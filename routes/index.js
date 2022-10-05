@@ -62,6 +62,10 @@ module.exports = () => {
     router.get('/reestablecer-password',authControllers.formRestablecerPassword)
     router.post('/reestablecer-password',authControllers.enviarToken)
 
+    //Resetear Password (Almacenando en base de datos)
+    router.get('/reestablecer-password/:token', authControllers.reestablecerPassword)
+    router.post('/reestablecer-password/:token', authControllers.guardarPassword)
+
 
     //Panel de administración
     router.get('/administracion',
@@ -92,6 +96,9 @@ module.exports = () => {
         authControllers.verificarUsuario,
         vacantesControllers.mostrarCandidatos
     )
+
+    //Buscar Vacantes
+    router.post('/buscador', vacantesControllers.buscarVacantes);
 
     return router;
 }

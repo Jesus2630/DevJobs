@@ -56,4 +56,7 @@ postulacionesSchema.pre('save', function(next){
     next()
 })
 
+//Crear indice
+postulacionesSchema.index({titulo: 'text'})
+
 module.exports = mongoose.model('Postulacion', postulacionesSchema);
