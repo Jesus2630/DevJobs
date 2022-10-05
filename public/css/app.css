@@ -438,6 +438,19 @@ p.candidatos {
     align-self: flex-start;
     margin-right: 1rem;
 }
+
+.admin-perfil{
+    position: absolute;
+    width: 70px;
+    right: 1rem;
+    top: 0.5rem;
+    border-radius: 50%;
+}
+
+.editar-foto{
+    width: 100px;
+}
+
 .cerrar-sesion p, 
 .cerrar-sesion a {
     margin:  0 2rem 0 0 ;
@@ -448,9 +461,7 @@ p.candidatos {
     color: white;
     display: flex;
 }
-.cerrar-sesion img {
-        width: 80px;
-}
+
 .botones {
     display: flex;
     justify-content: flex-start;
@@ -530,7 +541,7 @@ p.candidatos {
 }
 .datos-reclutador p {
     font-size: 2.4rem;
-    color: white;
+    color: var(--color-gris);
 }
 @media (min-width:768px){
     .enviar-datos {
@@ -542,9 +553,11 @@ p.candidatos {
 }
 .enviar-datos h2 {
     font-size: 4rem;
-    color: white;
+    color: var(--color-gris);
+    text-align: center;
 }
 .enviar-datos p {
-    color: white;
+    color: var(--color-gris);
     font-size: 1.8rem;
+    text-align: center;
 }

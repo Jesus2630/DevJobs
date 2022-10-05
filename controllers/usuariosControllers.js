@@ -21,7 +21,7 @@ const configuracionMulter = {
         if( file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
             cb(null, true);
         }else{
-            cb(null, false);
+            cb(new Error('Formato no válido'), false);
         }
       }
 } 
@@ -40,7 +40,7 @@ exports.subirImagen = (req,res,next) =>{
             } else { 
                 req.flash('error', error.message);
             }
-            res.redirect('/administracion');
+            res.redirect('/editar-perfil');
             return;
         } else {
             next();
@@ -115,6 +115,7 @@ exports.formEditarPerfil = (req,res) =>{
         nombrePagina : 'Edita tu pefil de Enjobs',
         usuario: req.user,
         cerrarSesion: true,
+        imagen: req.user.imagen,
         nombre : req.user.nombre         
     })
 }
@@ -159,6 +160,7 @@ exports.validarPerfil = async (req,res,next) =>{
             nombrePagina : 'Edita tu pefil de Enjobs',
             usuario: req.user,
             cerrarSesion: true,
+            imagen: req.user.imagen,
             nombre : req.user.nombre         
         })
         return;
