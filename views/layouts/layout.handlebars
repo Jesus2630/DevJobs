@@ -34,9 +34,12 @@
 
         {{#if cerrarSesion}}
             <div class="cerrar-sesion">
-                <p>{{nombre}}</p>
                 <a href="/administracion">Administracion</a>
                 <a href="/cerrar-sesion">Cerrar Sesión</a> 
+                <p>{{nombre}}</p>
+                {{#if imagen}}
+                    <img src="/uploads/perfiles/{{imagen}}" class="admin-perfil">
+                {{/if}}
             </div>
         {{/if}}
 

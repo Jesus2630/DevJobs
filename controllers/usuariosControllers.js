@@ -4,34 +4,52 @@ const { body, validationResult } = require('express-validator');
 const shortid = require('shortid');
 const multer = require('multer');
 
-//ConfiguracionMulter
-const storage = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null, __dirname + '../../public/uploads/perfiles')
-    },
-    filename: function(req,file,cb){
-        cb(null, `${Date.now()}-${file.originalname}`)
-    }
-})
 
-
-//Subir imagen
-const upload = multer({ 
-    storage: storage,
-    fileFilter: (req,file,cb,res) =>{
-        if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+//Configuracion Multer
+const configuracionMulter = {
+    limits: {fileSize: 100000},
+    storage : fileStorage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, __dirname + '../../public/uploads/perfiles')
+        },
+        filename: function (req, file, cb) {
+            const extension = file.mimetype.split('/')[1]
+            cb(null, `${shortid.generate()}.${extension}`);  
+        }
+      }),
+      fileFilter(req,file,cb){
+        if( file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
             cb(null, true);
         }else{
-            cb(new Error('Formato No valido'), false);
+            cb(new Error('Formato no válido'), false);
         }
-    },
-    limits: {fileSize : 100000},
-})
+      }
+} 
+
+const upload = multer(configuracionMulter).single('imagen');
+
+exports.subirImagen = (req,res,next) =>{
+    upload(req, res, function (error) {
+        if (error) {
+            if (error instanceof multer.MulterError) { //si el error fue generado por multer
+                if (error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El tamaño es demasiado grande. Máximo 100KB');
+                } else {
+                    req.flash('error', error.message);
+                }
+            } else { 
+                req.flash('error', error.message);
+            }
+            res.redirect('/editar-perfil');
+            return;
+        } else {
+            next();
+        }
+    });
+}
 
 
-exports.subirImagen = upload.single('imagen')
-
-
+//Crear cuenta
 exports.formCrearCuenta = (req,res) =>{
      res.render('crear-cuenta', {
         nombrePagina: 'Crea tu cuenta en Enjobs',
@@ -97,6 +115,7 @@ exports.formEditarPerfil = (req,res) =>{
         nombrePagina : 'Edita tu pefil de Enjobs',
         usuario: req.user,
         cerrarSesion: true,
+        imagen: req.user.imagen,
         nombre : req.user.nombre         
     })
 }
@@ -112,9 +131,9 @@ exports.editarPerfil = async(req,res) =>{
         usuario.password = req.body.password
     }
 
-    if(req.file){
+   if(req.file){
         usuario.imagen = req.file.filename;
-    }
+   }
 
     await usuario.save();
 
@@ -141,6 +160,7 @@ exports.validarPerfil = async (req,res,next) =>{
             nombrePagina : 'Edita tu pefil de Enjobs',
             usuario: req.user,
             cerrarSesion: true,
+            imagen: req.user.imagen,
             nombre : req.user.nombre         
         })
         return;

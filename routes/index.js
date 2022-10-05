@@ -58,6 +58,11 @@ module.exports = () => {
         authControllers.cerrarSesion
     );
 
+    //Resetear Password
+    router.get('/reestablecer-password',authControllers.formRestablecerPassword)
+    router.post('/reestablecer-password',authControllers.enviarToken)
+
+
     //Panel de administración
     router.get('/administracion',
         authControllers.verificarUsuario,
@@ -71,11 +76,22 @@ module.exports = () => {
     )
     router.post('/editar-perfil',
         authControllers.verificarUsuario,
-       /*  usuariosControllers.validarPerfil, */
+       /* usuariosControllers.validarPerfil,  */
         usuariosControllers.subirImagen,
         usuariosControllers.editarPerfil
     )
 
+    //Recibir Msj de candidatos
+    router.post('/vacantes/:url',
+        vacantesControllers.subirCV,
+        vacantesControllers.contactar
+    )
+
+    //Mostrar los candidatos
+    router.get('/candidatos/:id',
+        authControllers.verificarUsuario,
+        vacantesControllers.mostrarCandidatos
+    )
 
     return router;
 }
