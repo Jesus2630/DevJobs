@@ -6,7 +6,7 @@
   "scripts": {
     "sv": "nodemon index",
     "dev": "concurrently \"npm run sv\" \"npm run watch \" ",
-    "start": "node ./index.js",
+    "start": "node index",
     "watch": "webpack -w --mode development"
   },
   "keywords": [],
