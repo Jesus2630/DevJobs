@@ -84,7 +84,7 @@ app.use((error,req,res) =>{
 
 /* Inicio el servidor */
 const host = '0.0.0.0';
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 
 app.listen(port,host, ()=>{
     console.log(`Servidor corriendo en el puerto ${port}`)
