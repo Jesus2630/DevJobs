@@ -43,6 +43,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "concurrently": "^7.4.0"
+    "concurrently": "^7.4.0",
+    "mongodb": "^4.11.0"
   }
 }
