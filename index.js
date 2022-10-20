@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 require('./config/db')
 
 const express = require('express')
